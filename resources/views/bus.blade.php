@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VILLALON - Bus Reservation System</title>
+    <title>BUSina - Bus Reservation System</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body class="bg-light">
@@ -19,7 +19,7 @@
                         <th>Bus Number</th>
                         <th>Seating Capacity</th>
                         <th>Driver Name</th>
-                        <th>Departure Location</th>
+                        <th>Bus Type</th>
                     </tr>
                 </thead>
                
@@ -29,7 +29,7 @@
                             <td>{{ $bus->bus_number }}</td>
                             <td>{{ $bus->seating_capacity }}</td>
                             <td>{{ $bus->driver_name }}</td>
-                            <td>{{ $bus->departure_location }}</td>
+                            <td>{{ $bus->typeLabel() }}</td>
                         </tr>
                     @endforeach
                 </tbody>
