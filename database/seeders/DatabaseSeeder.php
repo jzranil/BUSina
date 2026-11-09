@@ -12,14 +12,40 @@ class DatabaseSeeder extends Seeder
 
     /**
      * Seed the application's database.
+     *
+     * Demo accounts (one per role) are listed in README.md under "Demo accounts".
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        User::factory()->admin()->create([
+            'name' => 'BUSina Admin',
+            'email' => 'admin@busina.test',
+            'password' => 'admin1234',
+        ]);
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        User::factory()->employee()->create([
+            'name' => 'BUSina Employee',
+            'email' => 'employee@busina.test',
+            'password' => 'employee1234',
+        ]);
+
+        User::factory()->customer()->create([
+            'name' => 'Juan Dela Cruz',
+            'email' => 'customer@busina.test',
+            'password' => 'customer1234',
+        ]);
+
+        User::factory()->customer()->create([
+            'name' => 'Maria Santos',
+            'email' => 'maria@busina.test',
+            'password' => 'customer1234',
+        ]);
+
+        $this->call([
+            BusSeeder::class,
+            RouteSeeder::class,
+            ScheduleSeeder::class,
+            ReservationSeeder::class,
         ]);
     }
 }

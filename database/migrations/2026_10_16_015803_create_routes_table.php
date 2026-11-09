@@ -13,9 +13,13 @@ return new class extends Migration
             $table->string('route_name');
             $table->string('departure_location');
             $table->string('destination');
-            $table->decimal('distance', 8, 2); // Distance in kilometers
-            $table->string('duration'); // e.g., '3 hours 30 mins'
+            $table->decimal('distance', 8, 2);                 // kilometers
+            $table->unsignedSmallInteger('duration_minutes');  // travel time, used to compute arrival
+            $table->decimal('fare', 8, 2);                      // price per seat, in PHP
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
+
+            $table->unique(['departure_location', 'destination']);
         });
     }
 
