@@ -17,11 +17,12 @@ class ScheduleSeeder extends Seeder
     {
         $plan = [
             // bus,     route,               time
-            ['BUS001', 'Manila - Baguio',   '06:00:00'],
-            ['BUS002', 'Manila - Batangas', '07:00:00'],
-            ['BUS003', 'Manila - La Union', '08:00:00'],
-            ['BUS004', 'Cubao - Naga',      '20:00:00'],
-            ['BUS005', 'Pasay - Legazpi',   '05:00:00'],
+            ['BUS001', 'Manila – Baguio',   '06:00:00'],
+            ['BUS002', 'Manila – Batangas', '07:00:00'],
+            ['BUS003', 'Manila – Baler',    '08:00:00'],
+            ['BUS004', 'Manila – Naga',     '20:00:00'],
+            ['BUS005', 'Manila – Legazpi',  '05:00:00'],
+            ['BUS007', 'Cubao – Vigan',     '21:00:00'],
         ];
 
         foreach ($plan as [$busNumber, $routeName, $time]) {

@@ -25,26 +25,26 @@ class ReservationSeeder extends Seeder
             ->firstOrFail();
 
         // Juan: approved trip to Baguio for two people
-        $approved = $service->create($juan, $trip('Manila - Baguio', 2), [
+        $approved = $service->create($juan, $trip('Manila – Baguio', 2), [
             ['seat_number' => 5, 'passenger_name' => 'Juan Dela Cruz'],
             ['seat_number' => 6, 'passenger_name' => 'Ana Dela Cruz'],
         ], 'Juan Dela Cruz', '09171234567');
         $service->approve($approved, $employee);
 
         // Juan: pending trip to Batangas
-        $service->create($juan, $trip('Manila - Batangas', 4), [
+        $service->create($juan, $trip('Manila – Batangas', 4), [
             ['seat_number' => 12, 'passenger_name' => 'Juan Dela Cruz'],
         ], 'Juan Dela Cruz', '09171234567');
 
-        // Maria: pending family trip to La Union
-        $service->create($maria, $trip('Manila - La Union', 3), [
+        // Maria: pending family trip to Baler
+        $service->create($maria, $trip('Manila – Baler', 3), [
             ['seat_number' => 1, 'passenger_name' => 'Maria Santos'],
             ['seat_number' => 2, 'passenger_name' => 'Jose Santos'],
             ['seat_number' => 3, 'passenger_name' => 'Lea Santos'],
         ], 'Maria Santos', '+639281234567');
 
         // Maria: rejected booking (seat released again)
-        $rejected = $service->create($maria, $trip('Manila - Baguio', 2), [
+        $rejected = $service->create($maria, $trip('Manila – Baguio', 2), [
             ['seat_number' => 7, 'passenger_name' => 'Maria Santos'],
         ], 'Maria Santos', '+639281234567');
         $service->reject($rejected, $employee, 'Duplicate booking');

@@ -12,6 +12,7 @@ return new class extends Migration
             $table->id('user_id');
             $table->string('name');
             $table->string('email')->unique();
+            $table->string('contact_number', 20)->nullable(); // Philippine mobile, required on sign-up
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->enum('role', ['admin', 'employee', 'customer'])->default('customer');

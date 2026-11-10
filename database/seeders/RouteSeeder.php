@@ -5,18 +5,20 @@ namespace Database\Seeders;
 use App\Models\BusRoute;
 use Illuminate\Database\Seeder;
 
+/** The routes shown on the home page mockup, plus a return trip. */
 class RouteSeeder extends Seeder
 {
     public function run(): void
     {
         $routes = [
-            // name,                 from,     to,          km,  minutes, fare
-            ['Manila - Baguio',      'Manila', 'Baguio',    250, 300, 750],
-            ['Manila - Batangas',    'Manila', 'Batangas',  110, 150, 280],
-            ['Manila - La Union',    'Manila', 'La Union',  270, 360, 720],
-            ['Pasay - Legazpi',      'Pasay',  'Legazpi',   550, 600, 1150],
-            ['Cubao - Naga',         'Cubao',  'Naga',      380, 480, 900],
-            ['Baguio - Manila',      'Baguio', 'Manila',    250, 300, 750],
+            // name,                 from,     to,         km,  minutes, fare
+            ['Manila – Baguio',     'Manila', 'Baguio',   250, 360, 750],
+            ['Manila – Legazpi',    'Manila', 'Legazpi',  520, 660, 1150],
+            ['Manila – Batangas',   'Manila', 'Batangas', 110, 150, 280],
+            ['Cubao – Vigan',       'Cubao',  'Vigan',    400, 510, 950],
+            ['Manila – Baler',      'Manila', 'Baler',    230, 360, 650],
+            ['Manila – Naga',       'Manila', 'Naga',     450, 480, 900],
+            ['Baguio – Manila',     'Baguio', 'Manila',   250, 360, 750],
         ];
 
         foreach ($routes as [$name, $from, $to, $km, $minutes, $fare]) {

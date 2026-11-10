@@ -36,7 +36,7 @@ class UserController extends Controller
     {
         $data = $request->validated();
 
-        $user = new User(['name' => $data['name'], 'email' => $data['email'], 'password' => $data['password']]);
+        $user = new User(['name' => $data['name'], 'email' => $data['email'], 'contact_number' => $data['contact_number'] ?? null, 'password' => $data['password']]);
         $user->role = $data['role']; // role is not mass-assignable on purpose
         $user->save();
 
@@ -58,7 +58,7 @@ class UserController extends Controller
             return back()->withInput()->with('error', 'You cannot remove your own admin role.');
         }
 
-        $user->fill(['name' => $data['name'], 'email' => $data['email']]);
+        $user->fill(['name' => $data['name'], 'email' => $data['email'], 'contact_number' => $data['contact_number'] ?? null]);
         if (! empty($data['password'])) {
             $user->password = $data['password'];
         }

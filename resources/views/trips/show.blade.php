@@ -99,7 +99,7 @@
 
                         <div class="mt-6 grid gap-4 border-t border-slate-100 pt-6 sm:grid-cols-2">
                             <x-form.input name="contact_name" label="Contact person" :value="$user->name" required autocomplete="name" />
-                            <x-form.input name="contact_number" type="tel" label="Mobile number" required placeholder="09171234567" inputmode="tel" autocomplete="tel"
+                            <x-form.input name="contact_number" type="tel" label="Mobile number" :value="$user->contact_number" required placeholder="09171234567" inputmode="tel" autocomplete="tel"
                                           hint="Philippine mobile number: 09XXXXXXXXX or +639XXXXXXXXX" />
                         </div>
 

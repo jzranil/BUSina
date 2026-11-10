@@ -32,12 +32,14 @@ class DatabaseSeeder extends Seeder
         User::factory()->customer()->create([
             'name' => 'Juan Dela Cruz',
             'email' => 'customer@busina.test',
+            'contact_number' => '09171234567',
             'password' => 'customer1234',
         ]);
 
         User::factory()->customer()->create([
             'name' => 'Maria Santos',
             'email' => 'maria@busina.test',
+            'contact_number' => '+639281234567',
             'password' => 'customer1234',
         ]);
 
