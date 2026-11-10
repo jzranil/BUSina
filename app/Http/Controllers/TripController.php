@@ -16,7 +16,7 @@ class TripController extends Controller
         return view('welcome', [
             'origins' => $this->origins(),
             'destinations' => $this->destinations(),
-            'popularRoutes' => BusRoute::active()->withCount('schedules')->orderByDesc('schedules_count')->limit(6)->get(),
+            'popularRoutes' => BusRoute::active()->withCount('schedules')->orderByDesc('schedules_count')->orderBy('route_id')->limit(6)->get(),
             'tripCount' => Schedule::bookable()->count(),
         ]);
     }
@@ -26,10 +26,12 @@ class TripController extends Controller
         $filters = $request->validate([
             'from' => ['nullable', 'string', 'max:100'],
             'to' => ['nullable', 'string', 'max:100'],
-            'date' => ['nullable', 'date_format:Y-m-d', 'after_or_equal:today'],
-            'passengers' => ['nullable', 'integer', 'min:1', 'max:'.ReservationService::MAX_SEATS_PER_BOOKING],
+            'date' => ['nullable', 'required_with:search', 'date_format:Y-m-d', 'after_or_equal:today'],
+            'passengers' => ['nullable', 'required_with:search', 'integer', 'min:1', 'max:'.ReservationService::MAX_SEATS_PER_BOOKING],
         ], [
             'date.after_or_equal' => 'Choose today or a later date.',
+            'date.required_with' => 'Choose a departure date.',
+            'passengers.required_with' => 'Choose how many passengers.',
         ]);
 
         $trips = Schedule::bookable()

@@ -6,17 +6,17 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ ($title ?? null) ? $title.' · ' : '' }}BUSina - Bus Reservations</title>
     <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600,700,800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.bunny.net/css?family=inter:400,500,600,700,800&display=swap" rel="stylesheet" />
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
 </head>
-<body class="flex min-h-full flex-col bg-slate-50 font-sans antialiased text-slate-900">
+<body class="flex min-h-full flex-col bg-[#faf7f8] font-sans antialiased text-slate-900">
 @php
     $user = auth()->user();
     $links = [
         ['label' => 'Home', 'href' => route('home'), 'active' => request()->routeIs('home')],
-        ['label' => 'Search Trips', 'href' => route('trips.index'), 'active' => request()->routeIs('trips.*')],
         ['label' => 'Routes', 'href' => route('routes.list'), 'active' => request()->routeIs('routes.list')],
+        ['label' => 'Schedules', 'href' => route('trips.index'), 'active' => request()->routeIs('trips.*')],
     ];
     if ($user?->isCustomer()) {
         array_unshift($links, ['label' => 'Dashboard', 'href' => route('customer.dashboard'), 'active' => request()->routeIs('customer.dashboard')]);
@@ -27,16 +27,16 @@
 
 <x-banner />
 
-<header x-data="{ open: false }" class="sticky top-0 z-40 border-b border-slate-200 bg-white/90 backdrop-blur">
+<header x-data="{ open: false }" class="sticky top-0 z-40 border-b border-slate-200 bg-white">
     <div class="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
         <a href="{{ $user?->isCustomer() ? route('customer.dashboard') : route('home') }}" aria-label="BUSina home">
             <x-logo size="sm" />
         </a>
 
-        <nav class="hidden items-center gap-1 md:flex" aria-label="Main">
+        <nav class="hidden flex-1 items-center gap-1 pl-6 md:flex" aria-label="Main">
             @foreach ($links as $link)
                 <a href="{{ $link['href'] }}" @if ($link['active']) aria-current="page" @endif
-                   class="rounded-lg px-3 py-2 text-sm font-medium {{ $link['active'] ? 'bg-brand-50 text-brand-700' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900' }}">
+                   class="rounded-lg px-3 py-2 text-sm {{ $link['active'] ? 'font-semibold text-brand-800' : 'font-medium text-slate-800 hover:text-brand-800' }}">
                     {{ $link['label'] }}
                 </a>
             @endforeach
@@ -44,8 +44,8 @@
 
         <div class="hidden items-center gap-2 md:flex">
             @guest
-                <a href="{{ route('login') }}" class="btn-ghost">Log in</a>
-                <a href="{{ route('register') }}" class="btn-primary">Sign up</a>
+                <a href="{{ route('login') }}" class="btn-secondary">Login</a>
+                <a href="{{ route('register') }}" class="btn-primary">Register</a>
             @else
                 @if ($user->isStaff())
                     <a href="{{ route('portal.dashboard') }}" class="btn-secondary">Staff portal</a>
@@ -83,8 +83,8 @@
         <div class="mt-3 border-t border-slate-100 pt-3">
             @guest
                 <div class="grid grid-cols-2 gap-2">
-                    <a href="{{ route('login') }}" class="btn-secondary">Log in</a>
-                    <a href="{{ route('register') }}" class="btn-primary">Sign up</a>
+                    <a href="{{ route('login') }}" class="btn-secondary">Login</a>
+                    <a href="{{ route('register') }}" class="btn-primary">Register</a>
                 </div>
             @else
                 @if ($user->isStaff())
@@ -107,10 +107,10 @@
     {{ $slot }}
 </main>
 
-<footer class="mt-16 border-t border-slate-200 bg-white">
-    <div class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-4 py-6 text-sm text-slate-500 sm:flex-row sm:px-6 lg:px-8">
-        <x-logo size="sm" />
-        <p>&copy; {{ date('Y') }} BUSina · Group 5 Laravel Project</p>
+<footer class="{{ request()->routeIs('home') ? '' : 'mt-16' }} bg-ink-900">
+    <div class="mx-auto flex max-w-7xl flex-col items-center gap-3 px-4 py-8 text-center sm:px-6 lg:px-8">
+        <x-logo size="sm" light />
+        <p class="text-xs text-slate-400">&copy; {{ date('Y') }} BUSina · Group 5 Laravel Project</p>
     </div>
 </footer>
 

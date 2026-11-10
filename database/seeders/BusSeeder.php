@@ -16,6 +16,7 @@ class BusSeeder extends Seeder
             ['BUS004', 'NAQ 4127', 'ordinary', 35, 'Norvie Villalon',    'active'],
             ['BUS005', 'DAB 5562', 'deluxe',   45, 'Fher Ong',           'active'],
             ['BUS006', 'WKR 6093', 'aircon',   45, 'Rommel Bautista',    'maintenance'],
+            ['BUS007', 'PXL 7714', 'aircon',   45, 'Ramon Aquino',       'active'],
         ];
 
         foreach ($buses as [$number, $plate, $type, $capacity, $driver, $status]) {

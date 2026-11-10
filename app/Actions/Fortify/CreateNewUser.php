@@ -19,16 +19,24 @@ class CreateNewUser implements CreatesNewUsers
      */
     public function create(array $input): User
     {
+        // Accept "0917 123 4567" or "0917-123-4567"
+        $input['contact_number'] = preg_replace('/[\s-]/', '', (string) ($input['contact_number'] ?? ''));
+
         Validator::make($input, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'contact_number' => ['required', 'regex:/^(09|\+639)\d{9}$/'],
             'password' => $this->passwordRules(),
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['accepted', 'required'] : '',
+        ], [
+            'contact_number.regex' => 'Enter a Philippine mobile number, like 09171234567 or +639171234567.',
         ])->validate();
 
+        // New sign-ups always get the database default role: customer
         return User::create([
             'name' => $input['name'],
             'email' => $input['email'],
+            'contact_number' => $input['contact_number'],
             'password' => Hash::make($input['password']),
         ]);
     }

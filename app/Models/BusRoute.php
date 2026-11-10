@@ -50,12 +50,12 @@ class BusRoute extends Model
         $query->where('is_active', true);
     }
 
-    /** "5h 30m" */
+    /** "6 h", "2 h 30 m" (as on the home page) */
     public function durationLabel(): string
     {
         $hours = intdiv($this->duration_minutes, 60);
         $minutes = $this->duration_minutes % 60;
 
-        return trim(($hours ? "{$hours}h " : '').($minutes ? "{$minutes}m" : ''));
+        return trim(($hours ? "{$hours} h " : '').($minutes ? "{$minutes} m" : '')); // "6 h", "2 h 30 m"
     }
 }
